@@ -22,6 +22,7 @@ import math
 warnings.filterwarnings('ignore')
 # tf.enable_eager_execution() # 开启动态图
 gpus = tf.config.list_physical_devices("GPU")
+logger.info("gpus {} ",gpus)
 if gpus:
     tf.config.experimental.set_memory_growth(gpus[0],True)
 

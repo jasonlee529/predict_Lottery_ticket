@@ -449,9 +449,11 @@ def predict_run(name):
         _data.append(int(predict_dict[item]))
         _title.append(item)
     logger.info("预测结果：{}".format(ans))
+    # _title.append("期数")
+    # _data.append(int(current_number) + 1)
     filedata.append(_data.copy())
     filetitle = _title.copy()
-    return filedata, filetitle
+    return int(current_number)+1,filedata, filetitle
 
 
 # if __name__ == "__main__":

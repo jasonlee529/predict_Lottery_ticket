@@ -49,10 +49,11 @@ if __name__ == '__main__':
             blue_sess = predict_tf.compat.v1.Session(graph=blue_graph)
             current_number = get_current_number(args.name)
             run_predict(int(size))
-            _data, _title = predict_run(args.name)
+            period,_data, _title = predict_run(args.name)
         filename = datetime.datetime.now().strftime('%Y%m%d')
+
         filepath = "{}{}/".format(predict_path, args.name)
-        fileadd = "{}{}{}".format(filepath, filename, ".csv")
+        fileadd = "{}{}{}{}{}".format(filepath, filename,"-",period, ".csv")
         if not os.path.exists(filepath):
             os.makedirs(filepath)
         df = pd.DataFrame(_data, columns=_title)

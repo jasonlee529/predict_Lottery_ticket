@@ -25,6 +25,7 @@ gpus = tf.config.list_physical_devices("GPU")
 logger.info("gpus {} ",gpus)
 if gpus:
     tf.config.experimental.set_memory_growth(gpus[0],True)
+logger.info('GPU:', tf.test.is_gpu_available())
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', default="qxc", type=str, help="选择训练数据")
@@ -439,12 +440,11 @@ def run(name, windows_size):
                     blue_sess = predict_tf.compat.v1.Session(graph=blue_graph)
                     current_number = get_current_number(args.name)
                     run_predict(int(w_size))
-                    _data, _title = predict_run(args.name)
+                    _period,_data, _title = predict_run(args.name)
                 df = pd.DataFrame(_data, columns=_title)
                 if not os.path.exists(filepath):
                     os.makedirs(filepath)
                 df.to_csv(fileadd, encoding="utf-8",index=False)
-
                 model_args[args.name]["model_args"]["red_epochs"] = _tmpRedEpochs
                 args.red_epochs = _tmpRedEpochs
                 model_args[args.name]["model_args"]["blue_epochs"] = _tmpBlueEpochs
